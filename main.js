@@ -6,20 +6,33 @@ var program = require('commander');
 var clc = require('cli-color');
 
 
+/*
+-- DO NOTHING
+Initial commit
+
+Changes to be committed:
 
 
+*/
 program.version('0.0.1')
     .option('-h, -help', 'Load Help')
+    .option('--verbose', 'Verbose output')
     .parse(process.argv);
 
-
+// -d Delete all offending lines
+// -a --all go through all files 
+// -add 
 
 
 exec("git status", (err, stdout, stderr) => {
-    // console.log(__dirname,'\n\n');
-    // console.log('currentWorkingDirectory:\t', process.cwd());
-    // console.log(stdout);
- 
+    if(program.verbose){
+        console.log(__dirname,'\n\n');
+        console.log('currentWorkingDirectory:\t', process.cwd());
+        console.log(stdout);
+    }
+
+ //TODO: more robust logic
+
     let modifiedFiles = _.split((_.split(stdout, 'Untracked files:')[0]), "Changes to be committed:")[1];
     // console.log(modifiedFiles);
     let unrevisedFiles = filterFiles(modifiedFiles);
@@ -65,7 +78,7 @@ let examineText = (fileText, fileLocation) => {
     let lines = _.split(fileText, '\n');
     for(let c = 0 ; c<lines.length; c++){
         if((lines[c].indexOf('System.out') > -1)){
-            console.log(clc.red('FILE:\t', fileLocation, ' contains a System.out on line ', c+1))  ;
+            console.log(clc.yellow('WARNING file:\t', fileLocation, ' contains a System.out on line ', c+1));
         }
     }    
 }
