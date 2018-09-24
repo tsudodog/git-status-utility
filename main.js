@@ -8,6 +8,8 @@ var clc = require('cli-color');
 
 
 
+//ideas for future funtionality
+// add an auto delete
 
 program
     .version('0.0.1')
