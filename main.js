@@ -10,6 +10,7 @@ var clc = require('cli-color');
 
 //ideas for future funtionality
 // add an auto delete
+// add scan all functionality instead of the default staging area.
 
 program
     .version('0.0.1')
@@ -70,6 +71,8 @@ let filterFiles = (input) => {
      });
 };
 
+//TODO: make this configurable somehow not sure what the best way to do this is 
+// but custom errors should be easy to provide
 let examineText = (fileText, fileLocation) => {
     let lines = _.split(fileText, '\n');
     for(let c = 0 ; c<lines.length; c++){
